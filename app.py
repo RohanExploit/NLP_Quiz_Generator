@@ -6,7 +6,20 @@ from collections import Counter
 import os
 import nltk
 from nltk.corpus import wordnet
-nltk.download('wordnet')
+
+def init_nltk():
+    resources = ['wordnet', 'omw-1.4', 'punkt']
+    for res in resources:
+        try:
+            if res == 'punkt':
+                nltk.data.find('tokenizers/punkt')
+            else:
+                nltk.data.find(f'corpora/{res}')
+        except LookupError:
+            print(f"Downloading NLTK resource: {res}")
+            nltk.download(res)
+
+init_nltk()
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'

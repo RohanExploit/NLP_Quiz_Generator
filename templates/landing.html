@@ -8,15 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generated MCQs</title>
+    <meta name="description" content="AI-powered MCQ Quiz Generator from PDF files. Transform your documents into engaging learning materials.">
+    <title>QuizZable - AI Quiz Generator</title>
 </head>
 <body>
     <main>
-        <img src="../static/images/QUIZZABLE.png" alt="">
+        <img src="{{ url_for('static', filename='images/QUIZZABLE.png') }}" alt="QuizZable Logo">
         <h2>Transform PDFs into Engaging Quizzes!</h2>
         <div class="landing-btn">
             <a class="button-3d" href="{{ url_for('index') }}">Play</a>
-            <a class="button-3d" href="{{ url_for('howto') }}">Usage</a>
+            <a class="button-3d secondary" href="{{ url_for('howto') }}">Usage</a>
         </div>
 
     </main>

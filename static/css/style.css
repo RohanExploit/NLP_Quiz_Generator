@@ -1,480 +1,287 @@
-:root{
-    --primary-color: #3a31d8;
-    --secondary-color: #020024;
-    --background-color: #010104;
-    --accent-color: #0600c2;
-    --white-color: #ebe9fc;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --primary: #7c3aed;
+    --primary-hover: #6d28d9;
+    --secondary: #2dd4bf;
+    --background: #0f172a;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --success: #10b981;
+    --error: #ef4444;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    font-family: 'Poppins', sans-serif;
-    background: rgb(255,172,208);
-    background: radial-gradient(circle, rgba(255,172,208,1) 0%, rgba(130,94,255,1) 46%, rgba(148,197,255,1) 100%);
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    background-image:
+        radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.12) 0, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(45, 212, 191, 0.12) 0, transparent 50%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
 }
 
 .container {
-    height: 100vh;
-    width: 100%;
-    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    background: linear-gradient(to right, #fff, var(--text-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+/* Upload Card Enhancement */
+.cardupload {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
+    padding: 3rem;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.cardupload:hover {
+    border-color: rgba(124, 58, 237, 0.3);
+}
+
+.cardupload h3 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.drop_box {
+    border: 2px dashed var(--glass-border);
+    border-radius: 1.5rem;
+    padding: 3rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.01);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.drop_box:hover {
+    border-color: var(--primary);
+    background: rgba(124, 58, 237, 0.05);
+}
+
+.drop_box i {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.drop_box h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.drop_box p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Input Fields */
+input[type=number] {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    margin: 1.5rem 0;
+    transition: all 0.3s ease;
+}
+
+input[type=number]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+}
+
+/* Updated premium button 3d to represent a modern primary button */
+.button-3d {
+    width: 100%;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, var(--primary), #4c1d95);
+    border: none;
+    border-radius: 1rem;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+}
+
+.button-3d:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.4);
+    filter: brightness(1.1);
+}
+
+.button-3d:active {
+    transform: translateY(1px);
+}
+
+/* Question Cards */
+.question-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+}
+
+.quiz-cards {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 2.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-cards p {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.ans-btn-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.answer-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.answer-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+}
+
+.answer-btn.correct {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: var(--success);
+    color: #fff;
+}
+
+.answer-btn.incorrect {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: var(--error);
+    color: #fff;
+}
+
+/* Loader */
+.loader-container {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-    .container h1{
-        color: var(--white-color);
-        font-size: 2.5rem;
-        margin-bottom: 20px;
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--glass-border);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Score Section */
+.texttopsecond-container {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.finalscore {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    color: var(--secondary);
+    margin: 1rem 0;
+}
+
+/* Footer / Return Button */
+.return-container .button-3d {
+    width: auto;
+    padding: 1rem 2rem;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .ans-btn-container {
+        grid-template-columns: 1fr;
     }
 
-    .container form{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-
-    input[type=file] {
-        max-width: 100%;
-        color: #5a3042;
-        font-weight: 600;
-        padding: 5px;
-        background-color: #ffc8c8;
-        border-radius: 8px;
-        border: 2px solid #5a3042;
-        margin: 20px;
-        }
-        
-        input[type=file]::file-selector-button {
-            margin-right: 20px;
-            border: 1px solid #5a3042;
-            background: #ffe9ef;
-            padding: 10px 20px;
-            border-radius: 8px;
-            color: #5a3042;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background .2s ease-in-out;
-        }
-        
-        input[type=file]::file-selector-button:hover {
-            background: #ca6d95;
-            color: white;
-        }
-
-        input[type=number]{
-            width: 250px;
-            max-width: 100%;
-            color: #5a3042;
-            font-weight: 700;
-            padding: 15px 5px;
-            background-color: #ffc8c8;
-            border-radius: 8px;
-            border: 2px solid #5a3042;
-            font-size: 1rem;
-        }
-
-        .button-3d {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            outline: none;
-            border: 0;
-            vertical-align: middle;
-            text-decoration: none;
-            font-family: "Press Start 2P", system-ui;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #382b22; /* Adjusted to match SCSS $text */
-            text-transform: uppercase;
-            padding: 1em 1.5em;
-            background: #ffe9e9; /* Assumed value for $light-pink */
-            border: 2px solid #b18597; /* Assumed value for $pink-border */
-            border-radius: 0.75em;
-            transform-style: preserve-3d;
-            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
-            }
-            
-            .button-3d::before {
-            position: absolute;
-            content: '';
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #ffb3b3; /* Assumed value for $dark-pink */
-            border-radius: inherit;
-            transform: translate3d(0, 0.75em, -1em);
-            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
-            }
-            
-            .button-3d:hover {
-                background: #ffcccc; /* Assumed value for $pink */
-                transform: translate(0, 0.25em);
-            }
-            
-            .button-3d:hover::before {
-                transform: translate3d(0, 0.5em, -1em);
-            }
-            
-            .button-3d:active {
-                background: #ffcccc; /* Assumed value for $pink */
-                transform: translate(0em, 0.75em);
-            }
-            
-            .button-3d:active::before {
-                box-shadow: 0 0 0 2px #b18597, 0 0 #f9c4d2;
-                transform: translate3d(0, 0, -1em);
-            }
-            
-
-    .quizquestions h1{
-        font-family: "Rowdies", sans-serif;
-        display: flex;
-        justify-content: center;
-        color: var(--white-color);
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
-
-    .question-container{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-
-    .question-container .quiz-cards{
-        background-color: var(--white-color);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: auto;
-        width: 700px;     
-        border-radius: 8px;
-        margin: 30px;
-    }
-    .question-container .quiz-cards .contents{
-        height: 90%;
-        width: 80%;
-        margin: 30px 0 30px 0;
-    }
-
-    li{
-        margin: 20px;
-        list-style-type: none;
-        text-decoration: none;
-    }
-    p{
-        font-family: "Rowdies", sans-serif;
-        font-size: 1.5rem;
-        font-weight: 500;
-        margin: 10px;
-        text-align: center;
-    }
-    img{
-        width: 10%;
-        height: auto;
-    }
-    #img{
-        width: 20%;
-        height: auto;
-    }
-    .img{
-        text-align: center;
-    }
-    #score{
-        text-align: center;
+    h1 {
         font-size: 2rem;
-        font-weight: 500;
-    }
-    .scoretext{
-        color: var(--white-color);
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
-    .finalscore{
-        color: #5a3042;
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        background-color: #f9c4d2;
-        border: 2px solid #5a3042;
-        border-radius: 10px;
-        padding: 1rem;
     }
 
-    .numbered-list{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        flex-wrap: wrap;
-        margin: 20px 0 20px 0;
+    .quiz-cards {
+        padding: 1.5rem;
     }
-    .btn-container{
-        width: 40%;
-        margin: 5px 10px;
-    }
-
-    .answer-btn {
-        position: relative;
-        display: inline-block;
-        cursor: pointer;
-        outline: none;
-        border: 0;
-        vertical-align: middle;
-        text-decoration: none;
-        font-family: "Press Start 2P", system-ui;
-        font-weight: 600;
-        color: white; /* Adjusted to match SCSS $text */
-        text-transform: uppercase;
-        /* padding: 1.25em; */
-        height: 80px;
-        width: 220px;
-        background: #817aff; /* Assumed value for $light-pink */
-        border: 2px solid #b18597; /* Assumed value for $pink-border */
-        border-radius: 0.75em;
-        transform-style: preserve-3d;
-        transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
-        margin: 5px;   
-        line-height: 1.5em; 
-    }
-        
-        .answer-btn::before {
-            position: absolute;
-            content: '';
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #ffb3b3; /* Assumed value for $dark-pink */
-            border-radius: inherit;
-            transform: translate3d(0, 0.75em, -1em);
-            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
-        }
-        
-        .answer-btn:hover {
-            background: #ffcccc; /* Assumed value for $pink */
-            color: #ca6d95;
-            transform: translate(0, 0.25em);
-        }
-        
-        .answer-btn:hover::before {
-            transform: translate3d(0, 0.5em, -1em);
-        }
-        
-        .answer-btn:active {
-            background: #ffcccc; /* Assumed value for $pink */
-            transform: translate(0em, 0.75em);
-        }
-        
-        .answer-btn:active::before {
-            box-shadow: 0 0 0 2px #b18597, 0 0 #f9c4d2;
-            transform: translate3d(0, 0, -1em);
-        }
-        
-
-
-    .correct {
-        background-color: #28a745; /* Green color for correct answer */
-        color: #fff; /* White text color */
-    }
-    
-    .incorrect {
-        background-color: #dc3545; /* Red color for incorrect answer */
-        color: #fff; /* White text color */
-    }
-
-            /* Loader CSS */
-            .loader {
-                width: 40px;
-                height: 20px;
-                background: orange;
-                position: absolute;
-                animation: l9-0 1.5s infinite linear;
-            }
-            .loader:before,
-            .loader:after {
-                content: "";
-                position: absolute;
-                background: inherit;
-                bottom: 100%;
-                width: 50%;
-                height: 100%;
-                animation: inherit;
-                animation-name: l9-1;
-            }
-            .loader:before {
-                left: 0;
-                transform-origin: bottom left;
-                --s: -1;
-            }
-            .loader:after {
-                right: 0;
-                transform-origin: bottom right;
-            }
-            @keyframes l9-0 {
-                0%, 10% {transform: translateY(0%) scaleY(1)}
-                49.99% {transform: translateY(-50%) scaleY(1)}
-                50% {transform: translateY(-50%) scaleY(-1)}
-                90%, 100% {transform: translateY(-100%) scaleY(-1)}
-            }
-            @keyframes l9-1 {
-                10%, 90% {transform: rotate(0deg)}
-                50% {transform: rotate(calc(var(--s,1)*180deg))}
-            }
-            /* Loader Container CSS */
-            .loader-container {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(255, 255, 255, 0.8);
-                backdrop-filter: blur(5px);
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-            }
-
-        .texttop-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            flex-direction: column;
-        }
-        .texttopsecond-container{
-            width: 40%;
-            height: auto;
-            background-color:#f9c4d2 ;
-            border-radius: 18px;
-            border: 2px solid #5a3042;
-        }
-        .texttopsecond-container h1, #score{
-            color: #5a3042;
-            margin: 20px;
-        }
-        .return-container{
-            margin: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .ans-btn-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            flex-wrap: wrap;
-            margin: 10px 0 10px 0;
-        }
-
-        .cardupload {
-            border-radius: 10px;
-            box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
-            width: 600px;
-            height: auto;
-            background-color: #ffffff;
-            padding: 10px 30px 20px;
-                        }
-                        
-                        .cardupload h3 {
-                            font-size: 22px;
-                            font-weight: 700;
-                            text-align: center;
-                            color: #5d55ff;
-                            
-                        }
-                        
-                        .drop_box {
-                            margin: 10px 0;
-                            padding: 30px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            flex-direction: column;
-                            border: 3px dotted #a3a3a3;
-                            background-color: #d8cdff;
-                            border-radius: 5px;
-                        }
-                        
-                        .drop_box h4 {
-                            font-size: 16px;
-                            font-weight: 700;
-                            color: #1d196e;
-                        }
-                        
-                        .drop_box p {
-                            margin-top: 10px;
-                            margin-bottom: 20px;
-                            font-size: 12px;
-                            color: #675fff
-                        }
-                        
-                        .btn {
-                            text-decoration: none;
-                            background-color: #005af0;
-                            color: #ffffff;
-                            padding: 10px 20px;
-                            border: none;
-                            outline: none;
-                            transition: 0.3s;
-                        }
-                        
-                        .btn:hover{
-                            text-decoration: none;
-                            background-color: #ffffff;
-                            color: #005af0;
-                            padding: 10px 20px;
-                            border: none;
-                            outline: 1px solid #010101;
-                        }
-                        .form input {
-                            margin: 10px 0;
-                            width: 100%;
-                            background-color: #e2e2e2;
-                            border: none;
-                            outline: none;
-                            padding: 12px 20px;
-                            border-radius: 4px;
-                        }
-
-                        .option {
-                            font-weight: bold;
-                            margin-right: 8px;
-                        }
-                        
-                        .user-answer {
-                            font-weight: bold;
-                            margin-left: 8px;
-                        }
-                        
-                        .feedback {
-                            color: green;
-                            margin-left: 8px;
-                        }
-                        
-                        .correct-answer {
-                            color: green;
-                            margin-top: 8px;
-                        }
-                        
-                        .feedback-message {
-                            font-size: 20px;
-                            font-weight: bold;
-                            text-align: center;
-                            margin-top: 20px;
-                        }
+}

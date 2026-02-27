@@ -1,171 +1,160 @@
-/* :root{
-    --text-color:#e4f7e4;
-    --background-color:#020803 ;
-    --primary-color:#3bc43d;
-    --secondary-color:#206a4f;
-    --accent-color:#2a8d82;
-} */
-/* :root{
-    --text-color:#efe7f8;
-    --background-color:#11081b ;
-    --primary-color:#ae89dd;
-    --secondary-color:#812788;
-    --accent-color:#c943c5;
-} */
-:root{
-    --primary-color: #3a31d8;
-    --secondary-color: #020024;
-    --background-color: #010104;
-    --accent-color: #0600c2;
-    --white-color: #ebe9fc;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --primary-glow: #7c3aed;
+    --secondary-glow: #2dd4bf;
+    --background: #0f172a;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-body{
+body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: rgb(255,172,208);
-    background: radial-gradient(circle, rgba(255,172,208,1) 0%, rgba(130,94,255,1) 46%, rgba(148,197,255,1) 100%);
-    animation: gradient 15s ease infinite;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    background-image:
+        radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.15) 0, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(45, 212, 191, 0.15) 0, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(20, 184, 166, 0.05) 0, transparent 50%);
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-main);
     overflow: hidden;
 }
 
-    main{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        width: 50%;
-    }
-        img{
-            width: 50%;
-            height: auto;
-        }
-        #img{
-            width: 30%;
-            height: auto;
-        }
-        .landing-btn{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .button-3d {
-            margin: 0 10px;
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            outline: none;
-            border: 0;
-            vertical-align: middle;
-            text-decoration: none;
-            font-family: "Press Start 2P", system-ui;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #382b22; /* Adjusted to match SCSS $text */
-            text-transform: uppercase;
-            padding: 1.25em;
-            background: #ffe9e9; /* Assumed value for $light-pink */
-            border: 2px solid #b18597; /* Assumed value for $pink-border */
-            border-radius: 0.75em;
-            transform-style: preserve-3d;
-            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
-            }
-            
-            .button-3d::before {
-                position: absolute;
-                content: '';
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: #ffb3b3; /* Assumed value for $dark-pink */
-                border-radius: inherit;
-                transform: translate3d(0, 0.75em, -1em);
-                transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
-            }
-            
-            .button-3d:hover {
-                background: #ffcccc; /* Assumed value for $pink */
-                transform: translate(0, 0.25em);
-            }
-            
-            .button-3d:hover::before {
-                transform: translate3d(0, 0.5em, -1em);
-            }
-            
-            .button-3d:active {
-                background: #ffcccc; /* Assumed value for $pink */
-                transform: translate(0em, 0.75em);
-            }
-            
-            .button-3d:active::before {
-                box-shadow: 0 0 0 2px #b18597, 0 0 #f9c4d2;
-                transform: translate3d(0, 0, -1em);
-            }
-            
-            h2 {
-                font-family: "Press Start 2P", system-ui;
-                width: 70%;
-                text-align: center;
-                line-height: 40px;
-                font-size: 1.5rem;
-                font-weight: 600;
-                margin: 10px 10px 30px 10px;
-                color: #fff;
-                text-shadow: 0 0 20px #3025ff; /* Adjust the shadow color and blur radius as needed */
-            }
-            
-            .main-container{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-            }
-                .card-container{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-                    .card{
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        width: 250px;
-                        height: 250px;
-                        margin: 10px;
-                        padding: 10px;
-                        border-radius: 10px;
-                        background-color: var(--white-color);
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    }
-                    .card:hover{
-                        transform: scale(1.1);
-                        transition: transform 0.5s;
-                    }
+body::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at center, transparent 0%, rgba(15, 23, 42, 1) 70%);
+    z-index: -1;
+}
 
-            i{
-                font-size: 5rem;
-                color: #ff8383;
-            }
-            h3{
-                font-size: 1.5rem;
-                font-family: "Press Start 2P", system-ui;
-                color: #281fd5;
-            }
-            p{
-                width: 70%;
-                font-size: 1rem;
-                font-family: "Poppins", sans-serif;
-                text-align: center;
-                font-weight: 600;
-                color: #7069ff;
-            }
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    width: 90%;
+    animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+img {
+    width: 140px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.5));
+    animation: float 6s ease-in-out infinite;
+    margin-bottom: 2rem;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+    margin: 0 0 2rem 0;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.landing-btn {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.button-3d {
+    position: relative;
+    padding: 1rem 2.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary-glow), #4c1d95);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.button-3d:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(124, 58, 237, 0.4);
+    filter: brightness(1.1);
+}
+
+.button-3d:active {
+    transform: translateY(1px);
+}
+
+.button-3d.secondary {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    box-shadow: none;
+}
+
+.button-3d.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsiveness */
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .landing-btn {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .button-3d {
+        text-align: center;
+    }
+}

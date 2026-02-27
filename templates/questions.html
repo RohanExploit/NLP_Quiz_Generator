@@ -1,161 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generated MCQs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>QuizZable - Quiz Time</title>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             let score = 0;
             let currentQuestionIndex = 0;
-            const totalQuestions = {{ mcqs|length }};
-            const questions = {{ mcqs|tojson }};
-            const userAnswers = [];
+            const totalQuestions = {{ mcqs| length
+        }};
+        const questions = {{ mcqs| tojson }};
+        const userAnswers = [];
 
-            const questionContainer = document.querySelector('.question-container');
-            const scoreDisplay = document.getElementById('score');
+        const questionContainer = document.querySelector('.question-container');
+        const scoreValue = document.getElementById('score-value');
+        const progressFill = document.getElementById('progress-fill');
 
-            function displayQuestion(index) {
-                if (index >= totalQuestions) {
-                    displayResults();
-                    hideScore();
-                    return;
-                }
+        function displayQuestion(index) {
+            if (index >= totalQuestions) {
+                displayResults();
+                return;
+            }
 
-                const question = questions[index];
-                questionContainer.innerHTML = `
-                    <div class="quiz-cards">
-                        <div class="contents">
-                            <p>Question ${index + 1} of ${totalQuestions}</p>
-                            <p>${question[1][0]}</p>
-                            <ol class="numbered-list">
-                                ${question[1][1].map((option, i) => `
-                                    <div class="btn-container">
-                                        <button class="answer-btn" data-option="${String.fromCharCode(65 + i)}" data-correct-answer="${question[1][2]}">
-                                            ${String.fromCharCode(65 + i)}. ${option}
-                                        </button>
-                                    </div>
-                                `).join('')}
-                            </ol>
+            // Update progress
+            const progressPercent = ((index) / totalQuestions) * 100;
+            progressFill.style.width = `${progressPercent}%`;
+
+            const question = questions[index];
+            questionContainer.innerHTML = `
+                    <div class="quiz-cards" style="animation: slideIn 0.5s ease-out;">
+                        <p style="color: var(--secondary); font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">
+                            Question ${index + 1} of ${totalQuestions}
+                        </p>
+                        <p>${question[1][0]}</p>
+                        <div class="ans-btn-container" style="margin-top: 2rem;">
+                            ${question[1][1].map((option, i) => `
+                                <button class="answer-btn" data-option="${String.fromCharCode(65 + i)}" data-correct-answer="${question[1][2]}">
+                                    <span style="color: var(--primary); font-weight: 700; margin-right: 10px;">${String.fromCharCode(65 + i)}</span> 
+                                    ${option}
+                                </button>
+                            `).join('')}
                         </div>
                     </div>
                 `;
-            }
+        }
 
-            function displayResults() {
-                let resultsHTML = `
-                    <p class="scoretext">Quiz completed!</p>
-                    <p class="finalscore">Final Score: ${score}/${totalQuestions * 10}</p>
-                    <div class="results-container">
+        function displayResults() {
+            progressFill.style.width = `100%`;
+            let resultsHTML = `
+                    <div class="texttopsecond-container">
+                        <h1>Quiz Results</h1>
+                        <p class="finalscore">${score}/${totalQuestions * 10}</p>
+                        <p style="color: var(--text-secondary); margin-top: 1rem;">${getMessage((score / (totalQuestions * 10)) * 100)}</p>
+                    </div>
+                    <div class="results-breakdown">
                 `;
-                userAnswers.forEach((answer, index) => {
-                    const question = questions[index];
-                    resultsHTML += `
-                        <div class="quiz-cards">
-                            <div class="contents">
-                                <p>${question[1][0]}</p>
-                                <ol class="numbered-list">
-                                    ${question[1][1].map((option, i) => `
-                                        <div class="btn-container">
-                                            <button class="answer-btn ${answer.selectedOption === String.fromCharCode(65 + i) ? (answer.isCorrect ? 'correct' : 'incorrect') : ''}" data-option="${String.fromCharCode(65 + i)}">
-                                                ${String.fromCharCode(65 + i)}. ${option}
-                                            </button>
-                                        </div>
-                                    `).join('')}
-                                </ol>
-                                <p>Your answer: ${answer.selectedOption} ${answer.isCorrect ? '(Correct)' : '(Wrong)'}</p>
-                                <p>Correct answer: ${answer.correctAnswer}</p>
+
+            userAnswers.forEach((answer, index) => {
+                const question = questions[index];
+                resultsHTML += `
+                        <div class="quiz-cards" style="background: rgba(255,255,255,0.02); margin-bottom: 1rem;">
+                            <p style="font-size: 1.1rem; margin-bottom: 1rem;">${question[1][0]}</p>
+                            <div class="ans-btn-container">
+                                ${question[1][1].map((option, i) => {
+                    const optionChar = String.fromCharCode(65 + i);
+                    let statusClass = '';
+                    if (optionChar === answer.correctAnswer) statusClass = 'correct';
+                    else if (optionChar === answer.selectedOption && !answer.isCorrect) statusClass = 'incorrect';
+
+                    return `
+                                        <button class="answer-btn ${statusClass}" disabled>
+                                            <span style="font-weight: 700; margin-right: 10px;">${optionChar}</span> 
+                                            ${option}
+                                        </button>
+                                    `;
+                }).join('')}
                             </div>
                         </div>
                     `;
-                });
-                resultsHTML += `</div>`;
-
-                // Calculate percentage score
-                const percentageScore = (score / (totalQuestions * 10)) * 100;
-
-                // Determine and append message based on score percentage
-                let message = '';
-                if (percentageScore === 100) {
-                    message = "Congratulations! You scored 100%! Perfect!";
-                } else if (percentageScore >= 90) {
-                    message = "Excellent! You scored above 90%!";
-                } else if (percentageScore >= 80) {
-                    message = "Well done! You scored above 80%!";
-                } else if (percentageScore >= 70) {
-                    message = "Good job! You scored above 70%!";
-                } else if (percentageScore >= 60) {
-                    message = "Nice work! You scored above 60%!";
-                } else {
-                    message = "You can do better next time. Keep practicing!";
-                }
-
-                resultsHTML += `<p>${message}</p>`;
-
-                questionContainer.innerHTML = resultsHTML;
-            }
-
-
-            function hideScore() {
-                scoreDisplay.style.display = 'none';
-            }
-
-            displayQuestion(currentQuestionIndex);
-
-            questionContainer.addEventListener('click', function(event) {
-                if (event.target.classList.contains('answer-btn')) {
-                    const selectedOption = event.target.dataset.option;
-                    const correctAnswer = event.target.dataset.correctAnswer;
-                    const isCorrect = selectedOption === correctAnswer;
-                    userAnswers.push({
-                        selectedOption,
-                        correctAnswer,
-                        isCorrect
-                    });
-
-                    if (isCorrect) {
-                        event.target.classList.add('correct');
-                        event.target.textContent += ' (Correct)';
-                        score += 10;
-                    } else {
-                        event.target.classList.add('incorrect');
-                        event.target.textContent += ' (Wrong)';
-                    }
-
-                    scoreDisplay.textContent = `Score: ${score}/${totalQuestions * 10}`;
-                    setTimeout(() => {
-                        currentQuestionIndex++;
-                        displayQuestion(currentQuestionIndex);
-                    }, 2000);  // Adjust the timeout duration as needed
-                }
             });
+            resultsHTML += `</div>`;
+            questionContainer.innerHTML = resultsHTML;
+            document.querySelector('.return-container').style.display = 'flex';
+        }
+
+        function getMessage(percentage) {
+            if (percentage === 100) return "👑 Masterclass! Perfect Score!";
+            if (percentage >= 80) return "🌟 Amazing! You really know your stuff!";
+            if (percentage >= 60) return "💪 Good effort! Keep it up!";
+            return "📚 Practice makes perfect. Try again!";
+        }
+
+        displayQuestion(currentQuestionIndex);
+
+        questionContainer.addEventListener('click', function (event) {
+            const btn = event.target.closest('.answer-btn');
+            if (btn && !btn.disabled) {
+                const selectedOption = btn.dataset.option;
+                const correctAnswer = btn.dataset.correctAnswer;
+                const isCorrect = selectedOption === correctAnswer;
+
+                // Disable all buttons in current container
+                const allBtns = questionContainer.querySelectorAll('.answer-btn');
+                allBtns.forEach(b => b.disabled = true);
+
+                userAnswers.push({ selectedOption, correctAnswer, isCorrect });
+
+                if (isCorrect) {
+                    btn.classList.add('correct');
+                    score += 10;
+                } else {
+                    btn.classList.add('incorrect');
+                    // Highlight the correct one
+                    allBtns.forEach(b => {
+                        if (b.dataset.option === correctAnswer) b.classList.add('correct');
+                    });
+                }
+
+                scoreValue.textContent = score;
+
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    displayQuestion(currentQuestionIndex);
+                }, 1500);
+            }
+        });
         });
     </script>
+    <style>
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        #progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="quizquestions">
-        <p class="img"><img src="../static/images/QUIZZABLE.png" alt=""></p>
-        <div class="texttop-container">
-            <div class="texttopsecond-container">
-                <h1>Generated Questions</h1>
-                {% if mcqs %}
-                <div id="score">Score: 0/{{ mcqs|length * 10 }}</div>
+    <div class="container" style="justify-content: flex-start; padding-top: 4rem;">
+        <div class="quiz-header"
+            style="width: 100%; max-width: 800px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <a href="{{ url_for('landing') }}">
+                <img src="{{ url_for('static', filename='images/QUIZZABLE.png') }}" alt="Logo" style="width: 60px;">
+            </a>
+            <div
+                style="background: var(--card-bg); padding: 0.5rem 1.5rem; border-radius: 2rem; border: 1px solid var(--glass-border);">
+                <span style="color: var(--text-secondary); font-size: 0.9rem;">Current Score: </span>
+                <span id="score-value" style="color: var(--secondary); font-weight: 700; font-size: 1.2rem;">0</span>
             </div>
         </div>
-        <div class="question-container">
-            <!-- quiz will be here -->
+
+        <div style="width: 100%; max-width: 800px;">
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
         </div>
-        {% else %}
-            <p>No MCQs generated.</p>
-        {% endif %}
-    </div>
-    <div class="return-container">
-        <a class="button-3d" href="{{ url_for('index') }}">Return</a>
+
+        <div class="question-container">
+            {% if not mcqs %}
+            <div class="texttopsecond-container">
+                <h1>No MCQs Found</h1>
+                <p>The document provided didn't contain enough clear context for quiz generation.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="return-container"
+            style="display: none; width: 100%; justify-content: center; margin-top: 2rem; padding-bottom: 4rem;">
+            <a class="button-3d" href="{{ url_for('index') }}" style="width: auto;">Try Another Document</a>
+        </div>
     </div>
 </body>
+
 </html>

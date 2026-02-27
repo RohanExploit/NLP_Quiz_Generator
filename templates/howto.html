@@ -1,45 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Generated MCQs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+    <title>QuizZable - How to Use</title>
 </head>
+
 <body>
-    <main>
-        <img id="img" src="../static/images/QUIZZABLE.png" alt="">
-        <div class="main-container">
-            <h2>How to use this app?</h2>
-            <div class="card-container">
-                <div class="card">
-                    <i class='bx bx-upload'></i>
-                    <h3>Step 1</h3>
-                    <p>Upload a PDF file containing the text you want to generate MCQs from.</p>
-                </div>
-                <div class="card">
-                    <i class='bx bx-hash' ></i>
-                    <h3>Step 2</h3>
-                    <p>Specify the number of questions you want to generate.</p>
-                </div>
-                <div class="card">
-                    <i class='bx bx-joystick-button' ></i>
-                    <h3>Step 3</h3>
-                    <p>Click the "Upload" button to generate MCQs from the uploaded PDF file.</p>
-                </div>
-                <div class="card">
-                    <i class='bx bx-shape-circle' ></i>
-                    <h3>Step 4</h3>
-                    <p>Answer the generated MCQs and check your score at the end.</p>
-                </div>
+    <main style="max-width: 900px; padding: 4rem 2rem;">
+        <img src="{{ url_for('static', filename='images/QUIZZABLE.png') }}" alt="Logo" style="width: 100px;">
+        <h2>Simple 4-Step Process</h2>
+
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; width: 100%; margin: 2rem 0;">
+            <div
+                style="background: var(--glass); padding: 2rem; border-radius: 1.5rem; border: 1px solid var(--glass-border); text-align: center; transition: transform 0.3s ease;">
+                <i class="fas fa-file-upload"
+                    style="font-size: 2rem; color: var(--secondary-glow); margin-bottom: 1rem;"></i>
+                <h3 style="font-family: 'Outfit'; margin-bottom: 0.5rem;">1. Upload</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Pick any PDF document from your device.</p>
             </div>
-            <a class="button-3d" href="{{ url_for('landing') }}">Go Back</a>
+            <div
+                style="background: var(--glass); padding: 2rem; border-radius: 1.5rem; border: 1px solid var(--glass-border); text-align: center; transition: transform 0.3s ease;">
+                <i class="fas fa-sliders-h"
+                    style="font-size: 2rem; color: var(--secondary-glow); margin-bottom: 1rem;"></i>
+                <h3 style="font-family: 'Outfit'; margin-bottom: 0.5rem;">2. Configure</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Choose how many questions you want (1-50).</p>
+            </div>
+            <div
+                style="background: var(--glass); padding: 2rem; border-radius: 1.5rem; border: 1px solid var(--glass-border); text-align: center; transition: transform 0.3s ease;">
+                <i class="fas fa-magic" style="font-size: 2rem; color: var(--secondary-glow); margin-bottom: 1rem;"></i>
+                <h3 style="font-family: 'Outfit'; margin-bottom: 0.5rem;">3. Generate</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Our AI reads and extracts core concepts
+                    instantly.</p>
+            </div>
+            <div
+                style="background: var(--glass); padding: 2rem; border-radius: 1.5rem; border: 1px solid var(--glass-border); text-align: center; transition: transform 0.3s ease;">
+                <i class="fas fa-graduation-cap"
+                    style="font-size: 2rem; color: var(--secondary-glow); margin-bottom: 1rem;"></i>
+                <h3 style="font-family: 'Outfit'; margin-bottom: 0.5rem;">4. Learn</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Test yourself and review your detailed results.
+                </p>
+            </div>
         </div>
+
+        <a class="button-3d" href="{{ url_for('landing') }}">Got it!</a>
     </main>
 </body>
+
 </html>
